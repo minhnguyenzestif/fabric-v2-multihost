@@ -63,6 +63,22 @@ Orderer: &OrdererDefaults
         Admins:
             Type: Signature
             Rule: "OR('OrdererMSP.admin')"
+    Capabilities:
+        V2_0: true
+
+Channel: &ChannelDefaults
+    Policies:
+        Readers:
+            Type: Signature
+            Rule: "OR('OrdererMSP.member', 'Org1MSP.member')"
+        Writers:
+            Type: Signature
+            Rule: "OR('OrdererMSP.member', 'Org1MSP.member')"
+        Admins:
+            Type: Signature
+            Rule: "OR('OrdererMSP.admin', 'Org1MSP.admin')"
+    Capabilities:
+        V2_0: true
 
 Profiles:
     SampleMultiNodeEtcdRaft:
@@ -74,8 +90,12 @@ Profiles:
             SampleConsortium:
                 Organizations:
                     - *Org1
+
     SampleSingleMSPChannel:
         Consortium: SampleConsortium
         Application:
+            <<: *ChannelDefaults
             Organizations:
                 - *Org1
+            Capabilities:
+                V2_0: true
