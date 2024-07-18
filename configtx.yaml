@@ -14,6 +14,9 @@ Organizations:
             Admins:
                 Type: Signature
                 Rule: "OR('OrdererMSP.admin')"
+        OrdererEndpoints:
+            - orderer0.example.com:7050
+            - orderer1.example.com:7050
 
     - &Org1
         Name: Org1MSP
